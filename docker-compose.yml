@@ -1,0 +1,31 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: mediforme
+      POSTGRES_PASSWORD: mediforme
+      POSTGRES_DB: mediforme_rag
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mediforme -d mediforme_rag"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://mediforme:mediforme@db:5432/mediforme_rag
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      APP_ENV: local
+    ports:
+      - "8000:8000"
+
+volumes:
+  db-data:
