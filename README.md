@@ -1,8 +1,9 @@
 # mediforme-chatbot-rag
 
-> 🥕 mediforme Chatbot RAG Service — FastAPI + pgvector 🥕
+> mediforme Chatbot RAG Service — FastAPI + pgvector
 
-Mediforme 챗봇의 **Retrieval-Augmented Generation** 서비스입니다. FDA openFDA 및 MFDS 의약품 라벨을 임베딩하고, Java 챗봇(backend_medi)이 질문 시 근거 청크를 retrieve 해 응답에 주입하도록 돕습니다.
+Mediforme 챗봇의 **Retrieval-Augmented Generation** 서비스입니다. 
+FDA openFDA 및 MFDS 의약품 라벨을 임베딩하고, Java 챗봇(backend_medi)이 질문 시 근거 청크를 retrieve 해 응답에 주입하도록 돕습니다.
 
 ## 설계 배경
 
