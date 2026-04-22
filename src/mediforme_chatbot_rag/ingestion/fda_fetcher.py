@@ -52,9 +52,7 @@ async def fetch_label(
     """brand_name 또는 generic_name 으로 openFDA 라벨을 1건 가져온다."""
     settings = get_settings()
     params: dict[str, Any] = {
-        "search": (
-            f'openfda.brand_name:"{query}" OR openfda.generic_name:"{query}"'
-        ),
+        "search": (f'openfda.brand_name:"{query}" OR openfda.generic_name:"{query}"'),
         "limit": 1,
     }
     if settings.openfda_api_key:
