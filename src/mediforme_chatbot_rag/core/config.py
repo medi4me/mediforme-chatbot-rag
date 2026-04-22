@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     openai_api_key: str = ""
     database_url: str = "postgresql://mediforme:mediforme@localhost:5432/mediforme_rag"
 
+    openfda_api_key: str = ""
+    openfda_base_url: str = "https://api.fda.gov"
+
     embedding_model: str = "text-embedding-3-large"
     embedding_dimensions: int = 3072
 
