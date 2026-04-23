@@ -7,7 +7,9 @@ router = APIRouter()
 
 
 class RetrieveRequest(BaseModel):
-    drug_id: str | None = Field(default=None, description="확정된 약 식별자. 있으면 메타데이터 필터에 사용.")
+    drug_id: str | None = Field(
+        default=None, description="확정된 약 식별자. 있으면 메타데이터 필터에 사용."
+    )
     category: str | None = Field(default=None, description="질문 카테고리. 라벨 섹션 매핑에 사용.")
     query: str = Field(description="사용자 자연어 질의.")
     top_k: int = Field(default=5, ge=1, le=20)
