@@ -23,6 +23,7 @@ dev = [
     "pytest>=8.3.0",
     "pytest-asyncio>=0.24.0",
     "httpx>=0.28.0",
+    "respx>=0.21.0",
     "ruff>=0.8.0",
     "mypy>=1.13.0",
 ]
@@ -61,5 +62,8 @@ warn_redundant_casts = true
 [tool.pytest.ini_options]
 minversion = "8.0"
 testpaths = ["tests"]
-addopts = "-ra -q"
+addopts = "-ra -q -m 'not integration'"
 asyncio_mode = "auto"
+markers = [
+    "integration: 외부 서비스(openFDA 등) 를 실제로 호출하는 테스트. `pytest -m integration` 으로만 실행.",
+]
