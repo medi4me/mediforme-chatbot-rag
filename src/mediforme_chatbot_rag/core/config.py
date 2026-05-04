@@ -1,4 +1,6 @@
-"""애플리케이션 설정 — 환경변수 로딩."""
+"""
+애플리케이션 설정 - 환경변수 로딩
+"""
 
 from functools import lru_cache
 
@@ -17,8 +19,9 @@ class Settings(BaseSettings):
     openfda_api_key: str = ""
     openfda_base_url: str = "https://api.fda.gov"
 
-    embedding_model: str = "text-embedding-3-large"
-    embedding_dimensions: int = 3072
+    embedding_model_name: str = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+    embedding_dimensions: int = 768
+    embedding_batch_size: int = 32
 
     default_top_k: int = 5
 
