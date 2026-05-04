@@ -1,0 +1,224 @@
+# 검색 성능 평가 쿼리 셋 (1차 30개)
+#
+# 형식:
+# - id: 식별자
+#   query: 사용자 자연어 질의
+#   language: ko | en
+#   category: pain | allergy | gi | chronic | new | kor_otc | psych | antibiotic | anticoagulant
+#   difficulty: easy | medium | hard
+#   expected_drug_names: list[str] — drug_name 에 substring 매칭 (case-insensitive)
+#   expected_sections: list[str] (선택) — section 에 substring 매칭
+
+# === 한국어 15 ===
+- id: ko-pain-001
+  query: 타이레놀 먹으면 안 되는 사람
+  language: ko
+  category: pain
+  difficulty: easy
+  expected_drug_names: [타이레놀]
+
+- id: ko-pain-002
+  query: 이부프로펜 부작용
+  language: ko
+  category: pain
+  difficulty: easy
+  expected_drug_names: [부루펜, ibuprofen]
+
+- id: ko-pain-003
+  query: 술 먹고 진통제 먹어도 돼?
+  language: ko
+  category: pain
+  difficulty: hard
+  expected_drug_names: [타이레놀, 게보린, 펜잘, 이지엔, 부루펜, acetaminophen, ibuprofen]
+
+- id: ko-pain-004
+  query: 두통이 심한데 평소 혈압약 먹어
+  language: ko
+  category: pain
+  difficulty: hard
+  expected_drug_names: [타이레놀, 게보린, acetaminophen, ibuprofen]
+
+- id: ko-allergy-001
+  query: 지르텍 졸음
+  language: ko
+  category: allergy
+  difficulty: easy
+  expected_drug_names: [지르텍, cetirizine]
+
+- id: ko-allergy-002
+  query: 콧물 흐를 때 먹는 알레르기 약
+  language: ko
+  category: allergy
+  difficulty: hard
+  expected_drug_names: [지르텍, 알레그라, 클라리틴, cetirizine, loratadine, fexofenadine]
+
+- id: ko-gi-001
+  query: 까스활명수 효능
+  language: ko
+  category: gi
+  difficulty: easy
+  expected_drug_names: [까스활명수]
+
+- id: ko-gi-002
+  query: 위장약과 진통제 같이 먹어도 되나
+  language: ko
+  category: gi
+  difficulty: hard
+  expected_drug_names: [훼스탈, 베아제, 베나치오, 겔포스]
+
+- id: ko-chronic-001
+  query: 고혈압 약과 진통제 같이
+  language: ko
+  category: chronic
+  difficulty: medium
+  expected_drug_names: [amlodipine, lisinopril, losartan, metoprolol]
+
+- id: ko-chronic-002
+  query: 메트포르민 부작용
+  language: ko
+  category: chronic
+  difficulty: easy
+  expected_drug_names: [metformin]
+
+- id: ko-new-001
+  query: 위고비 부작용
+  language: ko
+  category: new
+  difficulty: easy
+  expected_drug_names: [wegovy]
+
+- id: ko-kor-otc-001
+  query: 게보린 성분이 뭐야
+  language: ko
+  category: kor_otc
+  difficulty: easy
+  expected_drug_names: [게보린]
+
+- id: ko-kor-otc-002
+  query: 판콜에이 종합감기약
+  language: ko
+  category: kor_otc
+  difficulty: easy
+  expected_drug_names: [판콜에이]
+
+- id: ko-psych-001
+  query: 항우울제 부작용
+  language: ko
+  category: psych
+  difficulty: medium
+  expected_drug_names: [sertraline, escitalopram, fluoxetine, bupropion, duloxetine, venlafaxine]
+
+- id: ko-antibiotic-001
+  query: 아목시실린 알레르기
+  language: ko
+  category: antibiotic
+  difficulty: medium
+  expected_drug_names: [amoxicillin]
+
+# === 영어 15 ===
+- id: en-pain-001
+  query: acetaminophen liver damage warning
+  language: en
+  category: pain
+  difficulty: easy
+  expected_drug_names: [acetaminophen, tylenol, pain reliever]
+  expected_sections: [warnings]
+
+- id: en-pain-002
+  query: ibuprofen kidney side effect
+  language: en
+  category: pain
+  difficulty: medium
+  expected_drug_names: [ibuprofen]
+
+- id: en-pain-003
+  query: naproxen stomach bleeding
+  language: en
+  category: pain
+  difficulty: medium
+  expected_drug_names: [naproxen]
+
+- id: en-allergy-001
+  query: cetirizine drowsiness
+  language: en
+  category: allergy
+  difficulty: easy
+  expected_drug_names: [cetirizine, zyrtec]
+
+- id: en-allergy-002
+  query: loratadine vs fexofenadine
+  language: en
+  category: allergy
+  difficulty: hard
+  expected_drug_names: [loratadine, fexofenadine, claritin, allegra]
+
+- id: en-gi-001
+  query: omeprazole long term use
+  language: en
+  category: gi
+  difficulty: medium
+  expected_drug_names: [omeprazole, prilosec]
+
+- id: en-gi-002
+  query: famotidine acid reflux
+  language: en
+  category: gi
+  difficulty: easy
+  expected_drug_names: [famotidine, pepcid]
+
+- id: en-chronic-001
+  query: atorvastatin muscle pain
+  language: en
+  category: chronic
+  difficulty: easy
+  expected_drug_names: [atorvastatin, lipitor]
+
+- id: en-chronic-002
+  query: metformin lactic acidosis
+  language: en
+  category: chronic
+  difficulty: medium
+  expected_drug_names: [metformin, glucophage]
+
+- id: en-chronic-003
+  query: amlodipine swelling side effect
+  language: en
+  category: chronic
+  difficulty: easy
+  expected_drug_names: [amlodipine, norvasc]
+
+- id: en-new-001
+  query: ozempic weight loss side effects
+  language: en
+  category: new
+  difficulty: easy
+  expected_drug_names: [ozempic, semaglutide]
+
+- id: en-new-002
+  query: wegovy contraindications
+  language: en
+  category: new
+  difficulty: easy
+  expected_drug_names: [wegovy, semaglutide]
+  expected_sections: [contraindications]
+
+- id: en-psych-001
+  query: sertraline withdrawal symptoms
+  language: en
+  category: psych
+  difficulty: medium
+  expected_drug_names: [sertraline, zoloft]
+
+- id: en-antibiotic-001
+  query: amoxicillin allergic reaction
+  language: en
+  category: antibiotic
+  difficulty: easy
+  expected_drug_names: [amoxicillin]
+
+- id: en-anticoag-001
+  query: warfarin food interactions
+  language: en
+  category: anticoagulant
+  difficulty: hard
+  expected_drug_names: [warfarin, coumadin]
