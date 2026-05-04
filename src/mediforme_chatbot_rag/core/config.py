@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     openfda_api_key: str = ""
     openfda_base_url: str = "https://api.fda.gov"
 
+    mfds_api_key: str = ""
+    mfds_base_url: str = "https://apis.data.go.kr/1471000/DrugPrdtPrmsnInfoService06"
+
     embedding_model_name: str = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
     embedding_dimensions: int = 768
     embedding_batch_size: int = 32

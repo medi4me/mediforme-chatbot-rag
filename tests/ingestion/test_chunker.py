@@ -115,6 +115,22 @@ def test_multi_part_section_is_joined_with_newline() -> None:
     assert "Stop use" in chunks[0].text
 
 
+def test_source_parameter_overrides_default() -> None:
+    label = _label({"warnings": ["Consult a doctor if symptoms persist for more than seven days."]})
+
+    chunks = chunk_label(label, source="mfds_label")
+
+    assert all(c.source == "mfds_label" for c in chunks)
+
+
+def test_default_source_is_fda_label() -> None:
+    label = _label({"warnings": ["Consult a doctor if symptoms persist for more than seven days."]})
+
+    chunks = chunk_label(label)
+
+    assert all(c.source == "fda_label" for c in chunks)
+
+
 def test_drug_name_propagates_to_chunks() -> None:
     label = _label(
         {
