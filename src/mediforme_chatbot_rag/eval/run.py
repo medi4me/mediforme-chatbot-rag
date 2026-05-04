@@ -137,9 +137,7 @@ def main(argv: list[str] | None = None) -> int:
             expected_drug_names=expected_names,
             expected_sections=expected_sections,
         )
-        results_by_lang[language].append(
-            {"r5": r5, "r10": r10, "rr": rr, "latency_ms": latency_ms}
-        )
+        results_by_lang[language].append({"r5": r5, "r10": r10, "rr": rr, "latency_ms": latency_ms})
 
     report = _build_report(results_by_lang, latencies_ms, top_k=args.top_k)
     print(report)
