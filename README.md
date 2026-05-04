@@ -90,6 +90,27 @@ uv run ruff check .
 uv run mypy src
 ```
 
+### 인덱스 ingest
+
+FAISS 인덱스를 채우려면 ingest CLI 를 실행합니다. 약 단발 또는 시드 파일 기반 둘 다 지원합니다.
+
+```bash
+# 시드 파일로 한 번에 (권장)
+uv run python -m mediforme_chatbot_rag.ingestion.run \
+  --fda-drugs-file data/seed_fda.txt \
+  --mfds-drugs-file data/seed_mfds.txt
+
+# 단발 ingest
+uv run python -m mediforme_chatbot_rag.ingestion.run \
+  --fda-drug tylenol --mfds-drug 타이레놀
+
+# 출력 위치 오버라이드
+uv run python -m mediforme_chatbot_rag.ingestion.run \
+  --fda-drugs-file data/seed_fda.txt --output data/index_v2
+```
+
+기본 출력은 Settings.index_dir (`data/index`). MFDS 사용 시 `MFDS_API_KEY`, openFDA 키 활용 시 `OPENFDA_API_KEY` 가 필요합니다.
+
 ## 프로젝트 구조
 
 ```
