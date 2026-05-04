@@ -19,7 +19,7 @@ from mediforme_chatbot_rag.ingestion.mfds_fetcher import (
     fetch_label,
 )
 
-_BASE = "https://apis.data.go.kr/1471000/DrugPrdtPrmsnInfoService06/getDrugPrdtPermitDtlInq03"
+_BASE = "https://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList"
 
 
 def _label_payload(item_overrides: dict[str, Any] | None = None) -> dict[str, Any]:

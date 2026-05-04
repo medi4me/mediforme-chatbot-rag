@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 
 from mediforme_chatbot_rag.core.config import get_settings
 
-_ENDPOINT = "getDrugPrdtPermitDtlInq03"
+_ENDPOINT = "getDrbEasyDrugList"
 _MAX_RETRIES = 3
 _BACKOFF_BASE_SECONDS = 1.0
 _REQUEST_TIMEOUT_SECONDS = 10.0
