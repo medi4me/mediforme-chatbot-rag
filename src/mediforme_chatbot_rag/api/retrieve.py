@@ -1,7 +1,15 @@
-"""/retrieve — 약 ID / 카테고리 / 쿼리 기반 벡터 검색 엔드포인트 (Phase C-3 구현 예정)."""
+"""/retrieve — 약 ID / 카테고리 / 쿼리 기반 벡터 검색 엔드포인트
 
-from fastapi import APIRouter
+- 사용자 자연어 질의를 임베딩해 FAISS 인덱스에서 top-k 청크 검색
+- drug_id / category 로 결과 필터링
+"""
+
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel, Field
+
+from mediforme_chatbot_rag.services.retrieval import RetrievalService
 
 router = APIRouter()
 
@@ -27,7 +35,31 @@ class RetrieveResponse(BaseModel):
     chunks: list[RetrievedChunk]
 
 
+def get_retrieval_service(request: Request) -> RetrievalService:
+    service: RetrievalService = request.app.state.retrieval
+    return service
+
+
 @router.post("/retrieve", response_model=RetrieveResponse, tags=["retrieval"])
-def retrieve(_req: RetrieveRequest) -> RetrieveResponse:
-    """TODO(C-3): pgvector 쿼리 + 메타데이터 필터 + top-k 반환."""
-    return RetrieveResponse(chunks=[])
+def retrieve(
+    req: RetrieveRequest,
+    service: Annotated[RetrievalService, Depends(get_retrieval_service)],
+) -> RetrieveResponse:
+    results = service.retrieve(
+        req.query,
+        top_k=req.top_k,
+        drug_id=req.drug_id,
+        category=req.category,
+    )
+    return RetrieveResponse(
+        chunks=[
+            RetrievedChunk(
+                text=chunk.text,
+                source=chunk.source,
+                drug_name=chunk.drug_name,
+                section=chunk.section,
+                similarity=score,
+            )
+            for chunk, score in results
+        ]
+    )
