@@ -23,6 +23,8 @@ class Settings(BaseSettings):
     embedding_dimensions: int = 768
     embedding_batch_size: int = 32
 
+    index_dir: str = "data/index"
+
     default_top_k: int = 5
 
 
