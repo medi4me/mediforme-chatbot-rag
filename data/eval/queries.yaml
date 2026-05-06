@@ -7,6 +7,7 @@
 #   category: pain | allergy | gi | chronic | new | kor_otc | psych | antibiotic | anticoagulant
 #   difficulty: easy | medium | hard
 #   expected_drug_names: list[str] — drug_name 에 substring 매칭 (case-insensitive)
+#   expected_drug_id: str (선택) — drug_id 필터 모드(--use-drug-id-filter)에서 사용
 #   expected_sections: list[str] (선택) — section 에 substring 매칭
 
 # === 한국어 15 ===
@@ -16,6 +17,7 @@
   category: pain
   difficulty: easy
   expected_drug_names: [타이레놀]
+  expected_drug_id: 타이레놀
 
 - id: ko-pain-002
   query: 이부프로펜 부작용
@@ -23,6 +25,7 @@
   category: pain
   difficulty: easy
   expected_drug_names: [부루펜, ibuprofen]
+  expected_drug_id: ibuprofen
 
 - id: ko-pain-003
   query: 술 먹고 진통제 먹어도 돼?
@@ -44,6 +47,7 @@
   category: allergy
   difficulty: easy
   expected_drug_names: [지르텍, cetirizine]
+  expected_drug_id: 지르텍
 
 - id: ko-allergy-002
   query: 콧물 흐를 때 먹는 알레르기 약
@@ -58,6 +62,7 @@
   category: gi
   difficulty: easy
   expected_drug_names: [까스활명수]
+  expected_drug_id: 까스활명수
 
 - id: ko-gi-002
   query: 위장약과 진통제 같이 먹어도 되나
@@ -79,6 +84,7 @@
   category: chronic
   difficulty: easy
   expected_drug_names: [metformin]
+  expected_drug_id: metformin
 
 - id: ko-new-001
   query: 위고비 부작용
@@ -86,6 +92,7 @@
   category: new
   difficulty: easy
   expected_drug_names: [wegovy]
+  expected_drug_id: wegovy
 
 - id: ko-kor-otc-001
   query: 게보린 성분이 뭐야
@@ -93,6 +100,7 @@
   category: kor_otc
   difficulty: easy
   expected_drug_names: [게보린]
+  expected_drug_id: 게보린
 
 - id: ko-kor-otc-002
   query: 판콜에이 종합감기약
@@ -100,6 +108,7 @@
   category: kor_otc
   difficulty: easy
   expected_drug_names: [판콜에이]
+  expected_drug_id: 판콜에이
 
 - id: ko-psych-001
   query: 항우울제 부작용
@@ -114,6 +123,7 @@
   category: antibiotic
   difficulty: medium
   expected_drug_names: [amoxicillin]
+  expected_drug_id: amoxicillin
 
 # === 영어 15 ===
 - id: en-pain-001
@@ -122,6 +132,7 @@
   category: pain
   difficulty: easy
   expected_drug_names: [acetaminophen, tylenol, pain reliever]
+  expected_drug_id: acetaminophen
   expected_sections: [warnings]
 
 - id: en-pain-002
@@ -130,6 +141,7 @@
   category: pain
   difficulty: medium
   expected_drug_names: [ibuprofen]
+  expected_drug_id: ibuprofen
 
 - id: en-pain-003
   query: naproxen stomach bleeding
@@ -137,6 +149,7 @@
   category: pain
   difficulty: medium
   expected_drug_names: [naproxen]
+  expected_drug_id: naproxen
 
 - id: en-allergy-001
   query: cetirizine drowsiness
@@ -144,6 +157,7 @@
   category: allergy
   difficulty: easy
   expected_drug_names: [cetirizine, zyrtec]
+  expected_drug_id: cetirizine
 
 - id: en-allergy-002
   query: loratadine vs fexofenadine
@@ -158,6 +172,7 @@
   category: gi
   difficulty: medium
   expected_drug_names: [omeprazole, prilosec]
+  expected_drug_id: omeprazole
 
 - id: en-gi-002
   query: famotidine acid reflux
@@ -165,6 +180,7 @@
   category: gi
   difficulty: easy
   expected_drug_names: [famotidine, pepcid]
+  expected_drug_id: famotidine
 
 - id: en-chronic-001
   query: atorvastatin muscle pain
@@ -172,6 +188,7 @@
   category: chronic
   difficulty: easy
   expected_drug_names: [atorvastatin, lipitor]
+  expected_drug_id: atorvastatin
 
 - id: en-chronic-002
   query: metformin lactic acidosis
@@ -179,6 +196,7 @@
   category: chronic
   difficulty: medium
   expected_drug_names: [metformin, glucophage]
+  expected_drug_id: metformin
 
 - id: en-chronic-003
   query: amlodipine swelling side effect
@@ -186,6 +204,7 @@
   category: chronic
   difficulty: easy
   expected_drug_names: [amlodipine, norvasc]
+  expected_drug_id: amlodipine
 
 - id: en-new-001
   query: ozempic weight loss side effects
@@ -193,6 +212,7 @@
   category: new
   difficulty: easy
   expected_drug_names: [ozempic, semaglutide]
+  expected_drug_id: ozempic
 
 - id: en-new-002
   query: wegovy contraindications
@@ -200,6 +220,7 @@
   category: new
   difficulty: easy
   expected_drug_names: [wegovy, semaglutide]
+  expected_drug_id: wegovy
   expected_sections: [contraindications]
 
 - id: en-psych-001
@@ -208,6 +229,7 @@
   category: psych
   difficulty: medium
   expected_drug_names: [sertraline, zoloft]
+  expected_drug_id: sertraline
 
 - id: en-antibiotic-001
   query: amoxicillin allergic reaction
@@ -215,6 +237,7 @@
   category: antibiotic
   difficulty: easy
   expected_drug_names: [amoxicillin]
+  expected_drug_id: amoxicillin
 
 - id: en-anticoag-001
   query: warfarin food interactions
@@ -222,3 +245,4 @@
   category: anticoagulant
   difficulty: hard
   expected_drug_names: [warfarin, coumadin]
+  expected_drug_id: warfarin
