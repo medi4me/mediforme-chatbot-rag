@@ -22,8 +22,8 @@ class Settings(BaseSettings):
     mfds_api_key: str = ""
     mfds_base_url: str = "https://apis.data.go.kr/1471000/DrbEasyDrugInfoService"
 
-    embedding_model_name: str = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
-    embedding_dimensions: int = 768
+    embedding_model_name: str = "BAAI/bge-m3"
+    embedding_dimensions: int = 1024
     embedding_batch_size: int = 32
 
     index_dir: str = "data/index"
