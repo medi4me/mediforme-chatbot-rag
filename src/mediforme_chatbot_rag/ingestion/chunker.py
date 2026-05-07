@@ -43,22 +43,45 @@ def chunk_label(label: _LabelLike, *, source: str = "fda_label") -> list[Chunk]:
     라벨의 섹션을 검색 단위 청크 리스트로 변환
 
     - source 는 청크의 출처 식별자 (예: fda_label / mfds_label)
+    - 청크 텍스트 첫 줄에 약 이름 헤더를 prepend 해 의미 매칭 표면적을 넓힘
     """
+    header = _build_header(label)
+    body_max = max(MIN_CHUNK_CHARS, MAX_CHUNK_CHARS - len(header) - 2)
     chunks: list[Chunk] = []
     for section, parts in label.sections.items():
         text = "\n".join(part.strip() for part in parts if part.strip())
         if len(text) < MIN_CHUNK_CHARS:
             continue
-        for piece in _split_if_too_long(text, MAX_CHUNK_CHARS):
+        for piece in _split_if_too_long(text, body_max):
             chunks.append(
                 Chunk(
-                    text=piece,
+                    text=f"{header}\n\n{piece}",
                     section=section,
                     drug_name=label.drug_name,
                     source=source,
                 )
             )
     return chunks
+
+
+def _build_header(label: _LabelLike) -> str:
+    """
+    drug_name 과 (있으면) brand_name / generic_name 을 합친 헤더 라인 생성
+    """
+    primary = label.drug_name
+    aliases: list[str] = []
+    for attr in ("brand_name", "generic_name"):
+        candidate = getattr(label, attr, "") or ""
+        if not candidate:
+            continue
+        if candidate.lower() == primary.lower():
+            continue
+        if any(candidate.lower() == a.lower() for a in aliases):
+            continue
+        aliases.append(candidate)
+    if aliases:
+        return f"[{primary} / {' / '.join(aliases)}]"
+    return f"[{primary}]"
 
 
 def _split_if_too_long(text: str, max_chars: int) -> list[str]:

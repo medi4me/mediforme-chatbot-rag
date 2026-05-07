@@ -35,6 +35,8 @@ class FdaLabel(BaseModel):
     """openFDA 라벨 1건의 정규화된 표현."""
 
     drug_name: str
+    brand_name: str = ""
+    generic_name: str = ""
     sections: dict[str, list[str]] = Field(default_factory=dict)
     set_id: str
     effective_time: str
@@ -124,6 +126,8 @@ def _to_label(result: dict[str, Any]) -> FdaLabel:
 
     return FdaLabel(
         drug_name=drug_name,
+        brand_name=brand or "",
+        generic_name=generic or "",
         sections=sections,
         set_id=set_id,
         effective_time=effective_time,
