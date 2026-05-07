@@ -93,8 +93,8 @@ def test_empty_parts_are_filtered_out() -> None:
     chunks = chunk_label(label)
 
     assert len(chunks) == 1
-    assert "For temporary relief" in chunks[0].text
-    assert "\n" not in chunks[0].text
+    body = chunks[0].text.split("\n\n", 1)[1]
+    assert body == "For temporary relief of minor aches and headaches due to colds."
 
 
 def test_multi_part_section_is_joined_with_newline() -> None:
@@ -129,6 +129,44 @@ def test_default_source_is_fda_label() -> None:
     chunks = chunk_label(label)
 
     assert all(c.source == "fda_label" for c in chunks)
+
+
+def test_header_uses_only_drug_name_when_no_brand_generic() -> None:
+    label = _label({"warnings": ["Consult a doctor if symptoms persist for more than seven days."]})
+
+    chunks = chunk_label(label)
+
+    assert chunks[0].text.startswith("[TYLENOL]\n\n")
+
+
+def test_header_includes_brand_and_generic_when_distinct() -> None:
+    label = FdaLabel(
+        drug_name="TYLENOL",
+        brand_name="TYLENOL",
+        generic_name="ACETAMINOPHEN",
+        sections={"warnings": ["Consult a doctor if symptoms persist for more than seven days."]},
+        set_id="x",
+        effective_time="y",
+    )
+
+    chunks = chunk_label(label)
+
+    assert chunks[0].text.startswith("[TYLENOL / ACETAMINOPHEN]\n\n")
+
+
+def test_header_skips_alias_equal_to_primary() -> None:
+    label = FdaLabel(
+        drug_name="ASPIRIN",
+        brand_name="aspirin",  # same as drug_name (case-insensitive)
+        generic_name="ASPIRIN",  # same too
+        sections={"warnings": ["Consult a doctor if symptoms persist for more than seven days."]},
+        set_id="x",
+        effective_time="y",
+    )
+
+    chunks = chunk_label(label)
+
+    assert chunks[0].text.startswith("[ASPIRIN]\n\n")
 
 
 def test_drug_name_propagates_to_chunks() -> None:
