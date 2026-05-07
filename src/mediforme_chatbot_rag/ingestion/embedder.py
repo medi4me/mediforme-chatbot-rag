@@ -73,7 +73,14 @@ class Embedder:
         return model
 
 
+_MAX_SEQ_LENGTH_CAP = 1024
+
+
 def _load_sentence_transformer(model_name: str) -> SentenceTransformer:
     from sentence_transformers import SentenceTransformer
 
-    return SentenceTransformer(model_name)  # type: ignore[no-any-return]
+    model = SentenceTransformer(model_name)
+    # BGE-M3 처럼 default max_seq_length 가 8192 인 모델은 attention 단계에서
+    # seq² 비례로 OOM 이 나기 쉬워 합리적인 값으로 캡
+    model.max_seq_length = min(model.max_seq_length, _MAX_SEQ_LENGTH_CAP)
+    return model  # type: ignore[no-any-return]
