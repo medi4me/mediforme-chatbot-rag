@@ -246,3 +246,411 @@
   difficulty: hard
   expected_drug_names: [warfarin, coumadin]
   expected_drug_id: warfarin
+
+# === 추가 50개 — 항암 / biologics / 항바이러스 / 한국 처방 brand / 기타 ===
+
+# 항암 / 종양 (10)
+- id: ko-onco-001
+  query: 타목시펜 유방암 부작용
+  language: ko
+  category: oncology
+  difficulty: easy
+  expected_drug_names: [tamoxifen]
+  expected_drug_id: tamoxifen
+
+- id: ko-onco-002
+  query: 글리벡 백혈병 약 부작용
+  language: ko
+  category: oncology
+  difficulty: medium
+  expected_drug_names: [imatinib, gleevec]
+  expected_drug_id: imatinib
+
+- id: ko-onco-003
+  query: 키트루다 면역항암제
+  language: ko
+  category: oncology
+  difficulty: medium
+  expected_drug_names: [pembrolizumab, keytruda]
+  expected_drug_id: pembrolizumab
+
+- id: ko-onco-004
+  query: 옵디보 부작용
+  language: ko
+  category: oncology
+  difficulty: medium
+  expected_drug_names: [nivolumab, opdivo]
+  expected_drug_id: nivolumab
+
+- id: en-onco-001
+  query: tamoxifen breast cancer side effects
+  language: en
+  category: oncology
+  difficulty: easy
+  expected_drug_names: [tamoxifen]
+  expected_drug_id: tamoxifen
+
+- id: en-onco-002
+  query: trastuzumab herceptin cardiotoxicity
+  language: en
+  category: oncology
+  difficulty: medium
+  expected_drug_names: [trastuzumab, herceptin]
+  expected_drug_id: trastuzumab
+
+- id: en-onco-003
+  query: pembrolizumab keytruda immune side effect
+  language: en
+  category: oncology
+  difficulty: easy
+  expected_drug_names: [pembrolizumab, keytruda]
+  expected_drug_id: pembrolizumab
+
+- id: en-onco-004
+  query: paclitaxel chemotherapy neuropathy
+  language: en
+  category: oncology
+  difficulty: medium
+  expected_drug_names: [paclitaxel, taxol]
+  expected_drug_id: paclitaxel
+
+- id: en-onco-005
+  query: imatinib gleevec leukemia dosing
+  language: en
+  category: oncology
+  difficulty: easy
+  expected_drug_names: [imatinib, gleevec]
+  expected_drug_id: imatinib
+
+- id: en-onco-006
+  query: doxorubicin cardiac toxicity dose limit
+  language: en
+  category: oncology
+  difficulty: hard
+  expected_drug_names: [doxorubicin, adriamycin]
+  expected_drug_id: doxorubicin
+
+# 자가면역 biologics (5)
+- id: ko-bio-001
+  query: 휴미라 류마티스
+  language: ko
+  category: biologics
+  difficulty: easy
+  expected_drug_names: [adalimumab, humira, 휴미라]
+  expected_drug_id: adalimumab
+
+- id: ko-bio-002
+  query: 듀피젠트 아토피
+  language: ko
+  category: biologics
+  difficulty: medium
+  expected_drug_names: [dupilumab, dupixent]
+  expected_drug_id: dupilumab
+
+- id: en-bio-001
+  query: adalimumab humira tuberculosis screening
+  language: en
+  category: biologics
+  difficulty: medium
+  expected_drug_names: [adalimumab, humira]
+  expected_drug_id: adalimumab
+
+- id: en-bio-002
+  query: etanercept enbrel injection site reaction
+  language: en
+  category: biologics
+  difficulty: easy
+  expected_drug_names: [etanercept, enbrel]
+  expected_drug_id: etanercept
+
+- id: en-bio-003
+  query: ustekinumab psoriasis maintenance dose
+  language: en
+  category: biologics
+  difficulty: medium
+  expected_drug_names: [ustekinumab, stelara]
+  expected_drug_id: ustekinumab
+
+# 항바이러스 / HIV (5)
+- id: ko-virus-001
+  query: 타미플루 독감 부작용
+  language: ko
+  category: antiviral
+  difficulty: easy
+  expected_drug_names: [oseltamivir, tamiflu]
+  expected_drug_id: oseltamivir
+
+- id: ko-virus-002
+  query: 에이즈 약 부작용
+  language: ko
+  category: antiviral
+  difficulty: hard
+  expected_drug_names: [dolutegravir, bictegravir, emtricitabine, tenofovir]
+
+- id: en-virus-001
+  query: oseltamivir tamiflu pediatric dose
+  language: en
+  category: antiviral
+  difficulty: medium
+  expected_drug_names: [oseltamivir, tamiflu]
+  expected_drug_id: oseltamivir
+
+- id: en-virus-002
+  query: dolutegravir tivicay HIV resistance
+  language: en
+  category: antiviral
+  difficulty: easy
+  expected_drug_names: [dolutegravir, tivicay]
+  expected_drug_id: dolutegravir
+
+- id: en-virus-003
+  query: sofosbuvir hepatitis C cure
+  language: en
+  category: antiviral
+  difficulty: easy
+  expected_drug_names: [sofosbuvir, sovaldi]
+  expected_drug_id: sofosbuvir
+
+# 갑상선 / 호르몬 (3)
+- id: ko-hormone-001
+  query: 씬지로이드 갑상선
+  language: ko
+  category: hormone
+  difficulty: easy
+  expected_drug_names: [levothyroxine, 씬지로이드, synthroid]
+  expected_drug_id: levothyroxine
+
+- id: en-hormone-001
+  query: levothyroxine synthroid timing food
+  language: en
+  category: hormone
+  difficulty: medium
+  expected_drug_names: [levothyroxine, synthroid]
+  expected_drug_id: levothyroxine
+
+- id: en-hormone-002
+  query: estradiol menopause hormone therapy risks
+  language: en
+  category: hormone
+  difficulty: medium
+  expected_drug_names: [estradiol]
+  expected_drug_id: estradiol
+
+# 한국 처방 brand (10)
+- id: ko-rx-001
+  query: 노바스크 혈압약 부작용
+  language: ko
+  category: chronic
+  difficulty: easy
+  expected_drug_names: [amlodipine, 노바스크, norvasc]
+  expected_drug_id: amlodipine
+
+- id: ko-rx-002
+  query: 다이아벡스 당뇨 부작용
+  language: ko
+  category: chronic
+  difficulty: easy
+  expected_drug_names: [metformin, 다이아벡스]
+  expected_drug_id: metformin
+
+- id: ko-rx-003
+  query: 리피토 콜레스테롤 약
+  language: ko
+  category: chronic
+  difficulty: easy
+  expected_drug_names: [atorvastatin, 리피토, lipitor]
+  expected_drug_id: atorvastatin
+
+- id: ko-rx-004
+  query: 자누비아 당뇨 약
+  language: ko
+  category: chronic
+  difficulty: easy
+  expected_drug_names: [sitagliptin, 자누비아, januvia]
+  expected_drug_id: sitagliptin
+
+- id: ko-rx-005
+  query: 콘서타 ADHD 부작용
+  language: ko
+  category: psych
+  difficulty: easy
+  expected_drug_names: [methylphenidate, 콘서타, concerta]
+  expected_drug_id: methylphenidate
+
+- id: ko-rx-006
+  query: 졸로프트 우울증 약
+  language: ko
+  category: psych
+  difficulty: easy
+  expected_drug_names: [sertraline, 졸로프트, zoloft]
+  expected_drug_id: sertraline
+
+- id: ko-rx-007
+  query: 넥시움 위염 PPI
+  language: ko
+  category: gi
+  difficulty: easy
+  expected_drug_names: [esomeprazole, 넥시움, nexium]
+  expected_drug_id: esomeprazole
+
+- id: ko-rx-008
+  query: 딜라트렌 심부전
+  language: ko
+  category: chronic
+  difficulty: medium
+  expected_drug_names: [carvedilol, 딜라트렌]
+  expected_drug_id: carvedilol
+
+- id: ko-rx-009
+  query: 프라닥사 항응고
+  language: ko
+  category: anticoagulant
+  difficulty: medium
+  expected_drug_names: [dabigatran, 프라닥사, pradaxa]
+  expected_drug_id: dabigatran
+
+- id: ko-rx-010
+  query: 스틸녹스 수면제 의존성
+  language: ko
+  category: psych
+  difficulty: medium
+  expected_drug_names: [zolpidem, 스틸녹스, ambien]
+  expected_drug_id: zolpidem
+
+# 한국 OTC 추가 (5)
+- id: ko-otc-add-001
+  query: 우루사 간 영양제
+  language: ko
+  category: kor_otc
+  difficulty: easy
+  expected_drug_names: [우루사]
+  expected_drug_id: 우루사
+
+- id: ko-otc-add-002
+  query: 헥사메딘 가글
+  language: ko
+  category: kor_otc
+  difficulty: easy
+  expected_drug_names: [헥사메딘]
+  expected_drug_id: 헥사메딘
+
+- id: ko-otc-add-003
+  query: 마데카솔 흉터
+  language: ko
+  category: kor_otc
+  difficulty: easy
+  expected_drug_names: [마데카솔]
+  expected_drug_id: 마데카솔
+
+- id: ko-otc-add-004
+  query: 비판텐 기저귀발진
+  language: ko
+  category: kor_otc
+  difficulty: easy
+  expected_drug_names: [비판텐]
+  expected_drug_id: 비판텐
+
+- id: ko-otc-add-005
+  query: 안티푸라민 멍 통증
+  language: ko
+  category: kor_otc
+  difficulty: easy
+  expected_drug_names: [안티푸라민]
+  expected_drug_id: 안티푸라민
+
+# 마약성 진통제 / 기존 카테고리 보강 (12)
+- id: ko-pain-005
+  query: 트라마돌 의존성
+  language: ko
+  category: pain
+  difficulty: medium
+  expected_drug_names: [tramadol, 트라마돌]
+  expected_drug_id: tramadol
+
+- id: ko-pain-006
+  query: 옥시코돈 마약성 진통제
+  language: ko
+  category: pain
+  difficulty: medium
+  expected_drug_names: [oxycodone, oxycontin]
+  expected_drug_id: oxycodone
+
+- id: ko-pain-007
+  query: 모르핀 통증 조절
+  language: ko
+  category: pain
+  difficulty: medium
+  expected_drug_names: [morphine]
+  expected_drug_id: morphine
+
+- id: en-pain-004
+  query: morphine breakthrough cancer pain
+  language: en
+  category: pain
+  difficulty: hard
+  expected_drug_names: [morphine]
+  expected_drug_id: morphine
+
+- id: en-pain-005
+  query: tramadol seizure risk warning
+  language: en
+  category: pain
+  difficulty: medium
+  expected_drug_names: [tramadol]
+  expected_drug_id: tramadol
+
+- id: en-pain-006
+  query: oxycodone oxycontin opioid dependence
+  language: en
+  category: pain
+  difficulty: medium
+  expected_drug_names: [oxycodone, oxycontin]
+  expected_drug_id: oxycodone
+
+- id: en-gi-003
+  query: pantoprazole long term bone fracture
+  language: en
+  category: gi
+  difficulty: hard
+  expected_drug_names: [pantoprazole, protonix]
+  expected_drug_id: pantoprazole
+
+- id: en-anticoag-002
+  query: rivaroxaban xarelto bleeding risk
+  language: en
+  category: anticoagulant
+  difficulty: medium
+  expected_drug_names: [rivaroxaban, xarelto]
+  expected_drug_id: rivaroxaban
+
+- id: ko-anticoag-001
+  query: 와파린 음식 주의사항
+  language: ko
+  category: anticoagulant
+  difficulty: medium
+  expected_drug_names: [warfarin, coumadin]
+  expected_drug_id: warfarin
+
+- id: en-antibiotic-002
+  query: doxycycline sun sensitivity skin
+  language: en
+  category: antibiotic
+  difficulty: medium
+  expected_drug_names: [doxycycline]
+  expected_drug_id: doxycycline
+
+- id: en-sleep-001
+  query: zolpidem ambien sleep dependence
+  language: en
+  category: psych
+  difficulty: medium
+  expected_drug_names: [zolpidem, ambien]
+  expected_drug_id: zolpidem
+
+- id: en-sleep-002
+  query: melatonin children dose safety
+  language: en
+  category: psych
+  difficulty: easy
+  expected_drug_names: [melatonin]
+  expected_drug_id: melatonin
