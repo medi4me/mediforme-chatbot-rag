@@ -25,7 +25,7 @@ def parse_aliases(text: str, drug_name: str) -> tuple[str, str, bool]:
         return "", "", True
     prefix = f"{drug_name} / "
     if inner.startswith(prefix):
-        aliases = inner[len(prefix):].split(" / ")
+        aliases = inner[len(prefix) :].split(" / ")
         ok = True
     else:
         parts = inner.split(" / ")
