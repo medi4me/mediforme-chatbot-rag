@@ -1,0 +1,22 @@
+# 빌드 컨텍스트에서 제외 — 인덱스·모델·캐시는 런타임에 볼륨으로 마운트
+.git
+.github
+.venv
+.idea
+.pytest_cache
+.ruff_cache
+.mypy_cache
+__pycache__
+**/__pycache__
+*.pyc
+
+# 데이터·로그 (인덱스는 compose 볼륨으로 주입)
+data/
+logs/
+
+# 개발 전용
+tests/
+scripts/
+.env
+*.md
+!README.md
