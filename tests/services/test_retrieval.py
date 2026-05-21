@@ -99,6 +99,88 @@ def test_retrieve_drug_id_filter_is_case_insensitive() -> None:
     assert all(chunk.drug_name == "ASPIRIN" for chunk, _ in results)
 
 
+def test_retrieve_drug_id_matches_generic_when_drug_name_is_brand() -> None:
+    """
+    drug_name 이 brand 명("PAIN RELIEVER") 인 청크를 generic("acetaminophen") 으로 검색해도 매칭
+    """
+    index = FaissIndex(dim=4)
+    chunks = [
+        Chunk(
+            text="warning text",
+            section="warnings",
+            drug_name="PAIN RELIEVER EXTRA STRENGTH",
+            brand_name="PAIN RELIEVER EXTRA STRENGTH",
+            generic_name="ACETAMINOPHEN",
+        ),
+    ]
+    embeddings = [[1.0, 0.0, 0.0, 0.0]]
+    index.add(chunks, embeddings)
+
+    service = RetrievalService(
+        embedder=_embedder_with([1.0, 0.0, 0.0, 0.0]),
+        index=index,
+    )
+
+    results = service.retrieve("liver damage", top_k=5, drug_id="acetaminophen")
+
+    assert len(results) == 1
+    assert results[0][0].drug_name == "PAIN RELIEVER EXTRA STRENGTH"
+
+
+def test_retrieve_drug_id_matches_brand_when_drug_name_is_generic() -> None:
+    """
+    drug_name 이 generic("ibuprofen") 인 청크를 brand("ADVIL") 로 검색해도 매칭
+    """
+    index = FaissIndex(dim=4)
+    chunks = [
+        Chunk(
+            text="dosage text",
+            section="dosage",
+            drug_name="ibuprofen",
+            brand_name="ADVIL",
+            generic_name="ibuprofen",
+        ),
+    ]
+    embeddings = [[1.0, 0.0, 0.0, 0.0]]
+    index.add(chunks, embeddings)
+
+    service = RetrievalService(
+        embedder=_embedder_with([1.0, 0.0, 0.0, 0.0]),
+        index=index,
+    )
+
+    results = service.retrieve("kidney", top_k=5, drug_id="advil")
+
+    assert len(results) == 1
+
+
+def test_retrieve_drug_id_filter_excludes_unrelated_chunks() -> None:
+    """
+    drug_id 가 어느 필드와도 매칭 안 되면 결과 비어있어야 함
+    """
+    index = FaissIndex(dim=4)
+    chunks = [
+        Chunk(
+            text="text",
+            section="warnings",
+            drug_name="ASPIRIN",
+            brand_name="ASPIRIN",
+            generic_name="aspirin",
+        ),
+    ]
+    embeddings = [[1.0, 0.0, 0.0, 0.0]]
+    index.add(chunks, embeddings)
+
+    service = RetrievalService(
+        embedder=_embedder_with([1.0, 0.0, 0.0, 0.0]),
+        index=index,
+    )
+
+    results = service.retrieve("query", top_k=5, drug_id="ibuprofen")
+
+    assert results == []
+
+
 def test_retrieve_category_filter_matches_section() -> None:
     service = RetrievalService(
         embedder=_embedder_with([1.0, 0.0, 0.0, 0.0]),
