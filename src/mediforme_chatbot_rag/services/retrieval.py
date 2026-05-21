@@ -42,7 +42,14 @@ class RetrievalService:
             return []
 
         query_embedding = self._embedder.embed([query])[0]
-        candidates = self._index.search(query_embedding, top_k * _OVERSAMPLE_FACTOR)
+        # 필터가 있으면 후보를 인덱스 전체로 확장해 해당 약·섹션 청크가 좁은 oversample
+        # 창 밖으로 밀려 빈 결과가 되는 문제를 피함 (filter-then-rank). IndexFlatIP 는
+        # 어차피 전수 계산이라 후보 수를 키워도 비용 차이는 미미하다
+        if drug_id is not None or category is not None:
+            search_k = len(self._index)
+        else:
+            search_k = top_k * _OVERSAMPLE_FACTOR
+        candidates = self._index.search(query_embedding, search_k)
 
         filtered = [
             (chunk, score)

@@ -214,3 +214,27 @@ def test_retrieve_filter_with_no_match_returns_empty() -> None:
     )
 
     assert service.retrieve("query", top_k=5, drug_id="NOT_EXIST") == []
+
+
+def test_retrieve_drug_id_finds_low_similarity_chunk_outside_oversample_window() -> None:
+    """
+    drug_id 대상 청크가 유사도 낮아 oversample 창 밖이어도 필터로 반환되어야 함
+    (post-filter 가 좁은 후보 창에 걸려 빈 결과가 되던 문제 회귀 방지)
+    """
+    index = FaissIndex(dim=4)
+    # 쿼리([1,0,0,0])에 매우 가까운 ASPIRIN 청크 6개 + 유사도 0 인 TYLENOL 청크 1개
+    chunks = [Chunk(text=f"aspirin {i}", section="warnings", drug_name="ASPIRIN") for i in range(6)]
+    chunks.append(Chunk(text="tylenol", section="indications", drug_name="TYLENOL"))
+    embeddings = [[1.0, 0.0, 0.0, 0.0]] * 6 + [[0.0, 0.0, 0.0, 1.0]]
+    index.add(chunks, embeddings)
+
+    service = RetrievalService(
+        embedder=_embedder_with([1.0, 0.0, 0.0, 0.0]),
+        index=index,
+    )
+
+    # top_k=1 → 기존 oversample(5) 창에는 ASPIRIN 만 들어와 TYLENOL 이 누락되던 케이스
+    results = service.retrieve("pain", top_k=1, drug_id="tylenol")
+
+    assert len(results) == 1
+    assert results[0][0].drug_name == "TYLENOL"
