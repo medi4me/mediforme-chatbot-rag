@@ -35,6 +35,8 @@ class Chunk(BaseModel):
     text: str
     section: str
     drug_name: str
+    brand_name: str = ""
+    generic_name: str = ""
     source: str = "fda_label"
 
 
@@ -47,6 +49,8 @@ def chunk_label(label: _LabelLike, *, source: str = "fda_label") -> list[Chunk]:
     """
     header = _build_header(label)
     body_max = max(MIN_CHUNK_CHARS, MAX_CHUNK_CHARS - len(header) - 2)
+    brand = getattr(label, "brand_name", "") or ""
+    generic = getattr(label, "generic_name", "") or ""
     chunks: list[Chunk] = []
     for section, parts in label.sections.items():
         text = "\n".join(part.strip() for part in parts if part.strip())
@@ -58,6 +62,8 @@ def chunk_label(label: _LabelLike, *, source: str = "fda_label") -> list[Chunk]:
                     text=f"{header}\n\n{piece}",
                     section=section,
                     drug_name=label.drug_name,
+                    brand_name=brand,
+                    generic_name=generic,
                     source=source,
                 )
             )

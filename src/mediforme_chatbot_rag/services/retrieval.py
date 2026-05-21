@@ -74,6 +74,9 @@ def _matches_filters(
     drug_id: str | None,
     category: str | None,
 ) -> bool:
-    if drug_id is not None and chunk.drug_name.lower() != drug_id.lower():
-        return False
+    if drug_id is not None:
+        needle = drug_id.lower()
+        candidates = (chunk.drug_name, chunk.brand_name, chunk.generic_name)
+        if not any(needle in c.lower() for c in candidates if c):
+            return False
     return not (category is not None and chunk.section != category)
