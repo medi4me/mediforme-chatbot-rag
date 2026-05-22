@@ -238,3 +238,31 @@ def test_retrieve_drug_id_finds_low_similarity_chunk_outside_oversample_window()
 
     assert len(results) == 1
     assert results[0][0].drug_name == "TYLENOL"
+
+
+def test_retrieve_korean_drug_id_matches_english_generic_via_alias() -> None:
+    """
+    한국어 성분/브랜드 drug_id 가 영어 generic 청크에 alias 로 매칭 (Phase 2)
+    """
+    index = FaissIndex(dim=4)
+    chunks = [
+        Chunk(
+            text="weight management",
+            section="indications",
+            drug_name="WEGOVY",
+            brand_name="WEGOVY",
+            generic_name="SEMAGLUTIDE",
+        ),
+    ]
+    index.add(chunks, [[1.0, 0.0, 0.0, 0.0]])
+
+    service = RetrievalService(
+        embedder=_embedder_with([1.0, 0.0, 0.0, 0.0]),
+        index=index,
+    )
+
+    # 한국어 브랜드(위고비) / 성분(세마글루티드) → semaglutide 로 확장돼 매칭
+    assert len(service.retrieve("부작용", top_k=5, drug_id="위고비")) == 1
+    assert len(service.retrieve("부작용", top_k=5, drug_id="세마글루티드")) == 1
+    # 매핑 없는 한국어는 여전히 매칭 안 됨
+    assert service.retrieve("부작용", top_k=5, drug_id="존재하지않는약") == []

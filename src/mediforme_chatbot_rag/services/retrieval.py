@@ -9,6 +9,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from mediforme_chatbot_rag.core.config import get_settings
+from mediforme_chatbot_rag.core.drug_aliases import expand_drug_id
 from mediforme_chatbot_rag.ingestion.chunker import Chunk
 from mediforme_chatbot_rag.ingestion.embedder import Embedder
 from mediforme_chatbot_rag.ingestion.index import (
@@ -82,8 +83,11 @@ def _matches_filters(
     category: str | None,
 ) -> bool:
     if drug_id is not None:
-        needle = drug_id.lower()
-        candidates = (chunk.drug_name, chunk.brand_name, chunk.generic_name)
-        if not any(needle in c.lower() for c in candidates if c):
+        # 한국어 성분/브랜드 drug_id 는 영어 generic 으로도 확장해 매칭 (cross-lingual)
+        needles = expand_drug_id(drug_id)
+        candidates = [
+            c.lower() for c in (chunk.drug_name, chunk.brand_name, chunk.generic_name) if c
+        ]
+        if not any(needle in cand for needle in needles for cand in candidates):
             return False
     return not (category is not None and chunk.section != category)
