@@ -33,6 +33,15 @@ _INGREDIENT_KO_EN: dict[str, str] = {
     "카르베딜롤": "carvedilol",
     "다비가트란": "dabigatran",
     "오셀타미비르": "oseltamivir",
+    # 항암·biologics·특수약
+    "아달리무맙": "adalimumab",
+    "에타너셉트": "etanercept",
+    "두필루맙": "dupilumab",
+    "펨브롤리주맙": "pembrolizumab",
+    "트라스투주맙": "trastuzumab",
+    "타목시펜": "tamoxifen",
+    "이매티닙": "imatinib",
+    "암페타민": "amphetamine",
 }
 
 # 한국어 브랜드명 → 영어 generic
@@ -62,6 +71,14 @@ _BRAND_KO_EN: dict[str, str] = {
     "딜라트렌": "carvedilol",
     "프라닥사": "dabigatran",
     "타미플루": "oseltamivir",
+    # 항암·biologics·특수약 브랜드
+    "휴미라": "adalimumab",
+    "엔브렐": "etanercept",
+    "듀피젠트": "dupilumab",
+    "키트루다": "pembrolizumab",
+    "허셉틴": "trastuzumab",
+    "글리벡": "imatinib",
+    "애더럴": "amphetamine",
 }
 
 # 소문자 키로 통합
